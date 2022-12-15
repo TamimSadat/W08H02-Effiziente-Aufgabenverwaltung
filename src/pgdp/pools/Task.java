@@ -1,9 +1,17 @@
 package pgdp.pools;
 
+import java.util.Objects;
+
 public class Task<T, R> {
+
+	private final T input;
+	private R result;
+	private final TaskFunction<T,R> taskFunction;
 
 	protected Task(T input, TaskFunction<T, R> taskFunction) {
 		// TODO
+		this.input = input;
+		this.taskFunction = taskFunction;
 	}
 
 	public R getResult() {
@@ -14,13 +22,18 @@ public class Task<T, R> {
 	@Override
 	public int hashCode() {
 		// TODO
-		return 0;
+		return Objects.hash();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		// TODO
-		return false;
+		if (this == obj) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public static void main(String[] args) {
@@ -34,5 +47,13 @@ public class Task<T, R> {
 		System.out.println(t1.equals(t3)); // false
 
 		System.out.println(t1.getResult()); // 2
+	}
+
+	public T getInput() {
+		return input;
+	}
+
+	public TaskFunction<T, R> getTaskFunction() {
+		return taskFunction;
 	}
 }
