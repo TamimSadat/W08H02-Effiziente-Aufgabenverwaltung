@@ -26,20 +26,13 @@ public class TaskFactory<T, R> {
 
 	public Task<T, R> intern(Task<T, R> task) {
 		// TODO
-		/*
-		if (this.pool.containsKey(task.getInput())) {
-			return this.pool.get(task.getInput());
-		}
-		else if (task.getInput() == null) {
-			return null;
+		if (this.pool.getByValue(task.getInput(), task.getTaskFunction()) == task) {
+			return this.pool.getByValue(task.getInput(), task.getTaskFunction());
 		}
 		else {
-			this.pool.put(task.getInput(), task);
+			this.pool.insert(task);
 			return task;
 		}
-
-		 */
-		return null;
 	}
 
 	public static void main(String[] args) {
