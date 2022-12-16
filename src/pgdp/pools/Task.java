@@ -16,13 +16,16 @@ public class Task<T, R> {
 
 	public R getResult() {
 		// TODO
-		return null;
+		if (this.result == null) {
+			this.result = taskFunction.apply(this.input);
+		}
+		return this.result;
 	}
 
 	@Override
 	public int hashCode() {
 		// TODO
-		return Objects.hash();
+		return Objects.hash( this.input, this.taskFunction);
 	}
 
 	@Override
@@ -31,9 +34,14 @@ public class Task<T, R> {
 		if (this == obj) {
 			return true;
 		}
-		else {
+		if (obj == null || this.getClass() != obj.getClass()) {
 			return false;
 		}
+		Task<T, R> obj1 = (Task<T, R>) obj;
+		boolean sameInput = Objects.equals(this.getInput(), obj1.getInput());
+		boolean sameTaskFunction = Objects.equals(this.getTaskFunction(), obj1.getTaskFunction());
+
+		return  sameInput && sameTaskFunction;
 	}
 
 	public static void main(String[] args) {

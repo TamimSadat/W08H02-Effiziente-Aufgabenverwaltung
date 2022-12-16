@@ -12,7 +12,7 @@ public class TaskFunction<T, R> {
 	public TaskFunction(Function<T, R> function) {
 		// TODO
 		this.function = function;
-		ID = k;
+		this.ID = k;
 		k++;
 	}
 
@@ -24,7 +24,7 @@ public class TaskFunction<T, R> {
 	@Override
 	public int hashCode() {
 		// TODO
-		return Objects.hash();
+		return Objects.hash(this.ID);
 	}
 
 	@Override
