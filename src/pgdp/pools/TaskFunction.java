@@ -48,7 +48,4 @@ public class TaskFunction<T, R> {
 		System.out.println(f1.apply(2)); // 4
 	}
 
-	public int getID() {
-		return ID;
-	}
 }

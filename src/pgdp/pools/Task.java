@@ -25,7 +25,7 @@ public class Task<T, R> {
 	@Override
 	public int hashCode() {
 		// TODO
-		return Objects.hash( this.input, this.taskFunction);
+		return Objects.hash(this.input, this.taskFunction);
 	}
 
 	@Override
@@ -34,14 +34,16 @@ public class Task<T, R> {
 		if (this == obj) {
 			return true;
 		}
-		if (obj == null || this.getClass() != obj.getClass()) {
+		else if (obj == null || this.getClass() != obj.getClass()) {
 			return false;
 		}
-		Task<T, R> obj1 = (Task<T, R>) obj;
-		boolean sameInput = this.input.equals(obj1.getInput());
-		boolean sameTaskFunction = this.taskFunction.equals(obj1.getTaskFunction());
+		else {
+			Task<?, ?> obj1 = (Task<?, ?>) obj;
+			boolean sameInput = this.input.equals(obj1.getInput());
+			boolean sameTaskFunction = this.taskFunction.equals(obj1.getTaskFunction());
 
-		return  sameInput && sameTaskFunction;
+			return  sameInput && sameTaskFunction;
+		}
 	}
 
 	public static void main(String[] args) {
