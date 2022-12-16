@@ -38,8 +38,8 @@ public class Task<T, R> {
 			return false;
 		}
 		Task<T, R> obj1 = (Task<T, R>) obj;
-		boolean sameInput = Objects.equals(this.getInput(), obj1.getInput());
-		boolean sameTaskFunction = Objects.equals(this.getTaskFunction(), obj1.getTaskFunction());
+		boolean sameInput = this.input.equals(obj1.getInput());
+		boolean sameTaskFunction = this.taskFunction.equals(obj1.getTaskFunction());
 
 		return  sameInput && sameTaskFunction;
 	}
