@@ -1,30 +1,32 @@
 package pgdp.pools;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class TaskFactory<T, R> {
 
-	private final HashMap<T, Task<T, R>> pool;
+	private final TaskPool<T, R> pool;
 
 	public TaskFactory() {
 		// TODO ?
-		this.pool = new HashMap<>();
+		this.pool = new TaskPool<>();
 	}
 
 	public Task<T, R> create(T input, TaskFunction<T, R> function) {
 		// TODO
-		if (this.pool.containsKey(input)) {
-			return this.pool.get(input);
+		Task<T, R> obj1 = new Task<>(input, function);
+		if (Objects.equals(this.pool.getByValue(input, function), obj1)) {
+			return this.pool.getByValue(input, function);
 		}
 		else {
-			Task<T, R> obj1 = new Task<>(input, function);
-			this.pool.put(input, obj1);
-			return this.pool.get(input);
+			this.pool.insert(obj1);
+			return this.pool.getByValue(input, function);
 		}
 	}
 
 	public Task<T, R> intern(Task<T, R> task) {
 		// TODO
+		/*
 		if (this.pool.containsKey(task.getInput())) {
 			return this.pool.get(task.getInput());
 		}
@@ -36,6 +38,8 @@ public class TaskFactory<T, R> {
 			return task;
 		}
 
+		 */
+		return null;
 	}
 
 	public static void main(String[] args) {

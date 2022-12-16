@@ -31,8 +31,6 @@ public class TaskPool<T, R> {
 		else {
 			return null;
 		}
-
-
 	}
 
 	public static void main(String[] args) {
@@ -59,7 +57,7 @@ public class TaskPool<T, R> {
 		var f1 = new TaskFunction<>(FunctionLib.SQUARE);
 		var f2 = new TaskFunction<>(FunctionLib.SUM_OF_HALFS);
 		var tf3 = new Task<>(1, f2);
-		var tf4 = new Task<>(-129, f1);
+		var tf4 = new Task<>(128, f1);
 
 		tp.insert(tf3);
 		tp.insert(tf4);
@@ -67,7 +65,7 @@ public class TaskPool<T, R> {
 
 
 		System.out.println(tf3.equals(tp.getByValue(1, f2)));
-		System.out.println(tf4.equals(tp.getByValue(-129, f1)));
+		System.out.println(tf4.equals(tp.getByValue(128, f1)));
 
 	}
 }
