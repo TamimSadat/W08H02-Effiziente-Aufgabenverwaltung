@@ -1,6 +1,8 @@
 package pgdp.pools;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class TaskPool<T, R> {
@@ -24,13 +26,14 @@ public class TaskPool<T, R> {
 
 	public Task<T, R> getByValue(T input, TaskFunction<T, R> function) {
 		// TODO
-		Task<T, R> obj1 = new Task<>(input, function);
-		if (this.taskPool.containsKey(obj1)) {
-			return obj1;
+		Iterator<Task<T, R>> iterator = taskPool.values().iterator();
+		while (iterator.hasNext()) {
+			Task<T, R> task = iterator.next();
+			if (task.getInput().equals(input) && task.getTaskFunction().equals(function)) {
+				return task;
+			}
 		}
-		else {
-			return null;
-		}
+		return null;
 	}
 
 	public static void main(String[] args) {
@@ -53,19 +56,16 @@ public class TaskPool<T, R> {
 		System.out.println(t1.equals(tp.getByValue(1, f))); // true
 
 		 */
+		TaskFunction<Integer, Integer> f = new TaskFunction<>(FunctionLib.SQUARE);
 		TaskPool<Integer, Integer> tp = new TaskPool<>();
-		var f1 = new TaskFunction<>(FunctionLib.SQUARE);
-		var f2 = new TaskFunction<>(FunctionLib.SUM_OF_HALFS);
-		var tf3 = new Task<>(1, f2);
-		var tf4 = new Task<>(128, f1);
 
-		tp.insert(tf3);
-		tp.insert(tf4);
+		Task<Integer, Integer> t1 = new Task<>(1, f);
+		Task<Integer, Integer> t2 = new Task<>(1, f);
 
-
-
-		System.out.println(tf3.equals(tp.getByValue(1, f2)));
-		System.out.println(tf4.equals(tp.getByValue(128, f1)));
+		System.out.println(t1 == tp.insert(t1));
+		System.out.println(t1 == tp.insert(t2));
+		System.out.println(t1 == tp.getByValue(1, f));
+		//assert(t1 == tp.getByValue(1, f));
 
 	}
 }
